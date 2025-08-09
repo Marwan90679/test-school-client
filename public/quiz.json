@@ -1,0 +1,806 @@
+{
+  "A1": [
+  {
+  "competency": "Basic Arithmetic",
+  "question": "What is 7 + 5?",
+  "options": ["10", "11", "12", "13"],
+  "correct_answer": "12"
+  },
+  {
+  "competency": "Fractions",
+  "question": "Which fraction represents one-half?",
+  "options": ["1/4", "1/2", "3/4", "2/3"],
+  "correct_answer": "1/2"
+  },
+  {
+  "competency": "Geometry",
+  "question": "What shape has four equal sides and four right angles?",
+  "options": ["Triangle", "Square", "Circle", "Rectangle"],
+  "correct_answer": "Square"
+  },
+  {
+  "competency": "Algebra Basics",
+  "question": "If x = 3, what is x + 2?",
+  "options": ["3", "4", "5", "6"],
+  "correct_answer": "5"
+  },
+  {
+  "competency": "Reading Comprehension",
+  "question": "Tom has a red ball. He plays with it. What color is Tom’s ball?",
+  "options": ["Blue", "Red", "Green", "Yellow"],
+  "correct_answer": "Red"
+  },
+  {
+  "competency": "Vocabulary",
+  "question": "What does 'big' mean?",
+  "options": ["Small", "Large", "Tall", "Short"],
+  "correct_answer": "Large"
+  },
+  {
+  "competency": "Grammar",
+  "question": "Which word is a noun?",
+  "options": ["Run", "Happy", "Dog", "Quickly"],
+  "correct_answer": "Dog"
+  },
+  {
+  "competency": "Writing Skills",
+  "question": "Which sentence is complete?",
+  "options": ["The cat.", "The cat runs.", "Runs fast.", "Cat on mat."],
+  "correct_answer": "The cat runs."
+  },
+  {
+  "competency": "Physical Science",
+  "question": "What do we call water when it becomes a gas?",
+  "options": ["Ice", "Steam", "Liquid", "Snow"],
+  "correct_answer": "Steam"
+  },
+  {
+  "competency": "Life Science",
+  "question": "What do plants need to grow?",
+  "options": ["Darkness", "Water", "Rocks", "Metal"],
+  "correct_answer": "Water"
+  },
+  {
+  "competency": "Earth Science",
+  "question": "What is the name of the planet we live on?",
+  "options": ["Mars", "Earth", "Jupiter", "Venus"],
+  "correct_answer": "Earth"
+  },
+  {
+  "competency": "Scientific Inquiry",
+  "question": "What tool measures temperature?",
+  "options": ["Ruler", "Thermometer", "Scale", "Clock"],
+  "correct_answer": "Thermometer"
+  },
+  {
+  "competency": "World History",
+  "question": "Who built the pyramids in Egypt?",
+  "options": ["Romans", "Greeks", "Egyptians", "Vikings"],
+  "correct_answer": "Egyptians"
+  },
+  {
+  "competency": "National History",
+  "question": "Who was the first President of the United States?",
+  "options": ["Abraham Lincoln", "George Washington", "Thomas Jefferson", "John Adams"],
+  "correct_answer": "George Washington"
+  },
+  {
+  "competency": "Geography – Physical",
+  "question": "What is a large body of water called?",
+  "options": ["Mountain", "Ocean", "Desert", "Forest"],
+  "correct_answer": "Ocean"
+  },
+  {
+  "competency": "Geography – Cultural",
+  "question": "What language is mainly spoken in France?",
+  "options": ["Spanish", "French", "German", "Italian"],
+  "correct_answer": "French"
+  },
+  {
+  "competency": "Critical Thinking",
+  "question": "If it is raining, what should you use?",
+  "options": ["Sunglasses", "Umbrella", "Hat", "Gloves"],
+  "correct_answer": "Umbrella"
+  },
+  {
+  "competency": "Problem Solving",
+  "question": "You have 3 apples and eat 1. How many are left?",
+  "options": ["1", "2", "3", "4"],
+  "correct_answer": "2"
+  },
+  {
+  "competency": "Data Interpretation",
+  "question": "If a chart shows 5 cats and 3 dogs, how many pets are there?",
+  "options": ["2", "5", "8", "10"],
+  "correct_answer": "8"
+  },
+  {
+  "competency": "Citizenship",
+  "question": "What do you do to show respect for the flag?",
+  "options": ["Wave it", "Salute it", "Fold it", "Both B and C"],
+  "correct_answer": "Both B and C"
+  },
+  {
+  "competency": "Basic Economics",
+  "question": "What do you use to buy things in a store?",
+  "options": ["Toys", "Money", "Books", "Food"],
+  "correct_answer": "Money"
+  },
+  {
+  "competency": "Digital Literacy",
+  "question": "What should you do to keep your password safe?",
+  "options": ["Share it", "Write it down", "Keep it secret", "Change it daily"],
+  "correct_answer": "Keep it secret"
+  }
+  ],
+  "A2": [
+  {
+  "competency": "Basic Arithmetic",
+  "question": "What is 15 × 3?",
+  "options": ["30", "45", "60", "75"],
+  "correct_answer": "45"
+  },
+  {
+  "competency": "Fractions",
+  "question": "What is 1/4 + 1/4?",
+  "options": ["1/2", "1/4", "2/4", "3/4"],
+  "correct_answer": "1/2"
+  },
+  {
+  "competency": "Geometry",
+  "question": "How many sides does a pentagon have?",
+  "options": ["4", "5", "6", "7"],
+  "correct_answer": "5"
+  },
+  {
+  "competency": "Algebra Basics",
+  "question": "Solve for x: 2x = 8",
+  "options": ["2", "4", "6", "8"],
+  "correct_answer": "4"
+  },
+  {
+  "competency": "Reading Comprehension",
+  "question": "Sara found a lost dog and returned it to its owner. How did Sara help?",
+  "options": ["Kept the dog", "Fed the dog", "Returned the dog", "Played with the dog"],
+  "correct_answer": "Returned the dog"
+  },
+  {
+  "competency": "Vocabulary",
+  "question": "What does 'rapid' mean?",
+  "options": ["Slow", "Fast", "Quiet", "Loud"],
+  "correct_answer": "Fast"
+  },
+  {
+  "competency": "Grammar",
+  "question": "Which sentence uses the correct verb tense?",
+  "options": ["She run yesterday.", "She runs tomorrow.", "She ran yesterday.", "She running now."],
+  "correct_answer": "She ran yesterday."
+  },
+  {
+  "competency": "Writing Skills",
+  "question": "Which sentence has correct punctuation?",
+  "options": ["I like to swim", "I like to swim.", "I like to swim,", "I like to swim?"],
+  "correct_answer": "I like to swim."
+  },
+  {
+  "competency": "Physical Science",
+  "question": "What force pulls objects toward the Earth?",
+  "options": ["Magnetism", "Gravity", "Friction", "Electricity"],
+  "correct_answer": "Gravity"
+  },
+  {
+  "competency": "Life Science",
+  "question": "What part of a plant makes food using sunlight?",
+  "options": ["Roots", "Stem", "Leaves", "Flowers"],
+  "correct_answer": "Leaves"
+  },
+  {
+  "competency": "Earth Science",
+  "question": "What causes day and night?",
+  "options": ["Earth’s rotation", "Earth’s orbit", "Moon’s rotation", "Sun’s movement"],
+  "correct_answer": "Earth’s rotation"
+  },
+  {
+  "competency": "Scientific Inquiry",
+  "question": "What is the first step in the scientific method?",
+  "options": ["Experiment", "Question", "Conclusion", "Hypothesis"],
+  "correct_answer": "Question"
+  },
+  {
+  "competency": "World History",
+  "question": "What was the name of the ancient Greek city famous for its philosophers?",
+  "options": ["Rome", "Athens", "Sparta", "Troy"],
+  "correct_answer": "Athens"
+  },
+  {
+  "competency": "National History",
+  "question": "What document declared the U.S. independent from Britain?",
+  "options": ["Constitution", "Bill of Rights", "Declaration of Independence", "Emancipation Proclamation"],
+  "correct_answer": "Declaration of Independence"
+  },
+  {
+  "competency": "Geography – Physical",
+  "question": "Which continent is known for the Amazon Rainforest?",
+  "options": ["Africa", "Asia", "South America", "Australia"],
+  "correct_answer": "South America"
+  },
+  {
+  "competency": "Geography – Cultural",
+  "question": "What is the capital city of Japan?",
+  "options": ["Beijing", "Tokyo", "Seoul", "Bangkok"],
+  "correct_answer": "Tokyo"
+  },
+  {
+  "competency": "Critical Thinking",
+  "question": "If all cats are mammals and Fluffy is a cat, what is Fluffy?",
+  "options": ["Bird", "Reptile", "Mammal", "Fish"],
+  "correct_answer": "Mammal"
+  },
+  {
+  "competency": "Problem Solving",
+  "question": "A store sells 2 pens for $4. How much for 3 pens?",
+  "options": ["$4", "$6", "$8", "$10"],
+  "correct_answer": "$6"
+  },
+  {
+  "competency": "Data Interpretation",
+  "question": "A graph shows 10 apples sold on Monday and 15 on Tuesday. How many total apples were sold?",
+  "options": ["20", "25", "30", "35"],
+  "correct_answer": "25"
+  },
+  {
+  "competency": "Citizenship",
+  "question": "What is one responsibility of a citizen?",
+  "options": ["Breaking laws", "Voting", "Ignoring rules", "Avoiding taxes"],
+  "correct_answer": "Voting"
+  },
+  {
+  "competency": "Basic Economics",
+  "question": "What is it called when you save money in a bank?",
+  "options": ["Spending", "Borrowing", "Saving", "Trading"],
+  "correct_answer": "Saving"
+  },
+  {
+  "competency": "Digital Literacy",
+  "question": "What should you do if you receive an email from an unknown sender?",
+  "options": ["Open it", "Delete it", "Reply to it", "Share it"],
+  "correct_answer": "Delete it"
+  }
+  ],
+  "B1": [
+  {
+  "competency": "Basic Arithmetic",
+  "question": "What is 25 - 8?",
+  "options": ["17", "18", "19", "20"],
+  "correct_answer": "17"
+  },
+  {
+  "competency": "Fractions",
+  "question": "What is 3/4 of 20?",
+  "options": ["10", "15", "20", "25"],
+  "correct_answer": "15"
+  },
+  {
+  "competency": "Geometry",
+  "question": "What is the area of a rectangle with length 5 and width 3?",
+  "options": ["8", "10", "15", "20"],
+  "correct_answer": "15"
+  },
+  {
+  "competency": "Algebra Basics",
+  "question": "Solve for x: x + 7 = 12",
+  "options": ["3", "4", "5", "6"],
+  "correct_answer": "5"
+  },
+  {
+  "competency": "Reading Comprehension",
+  "question": "The bird flew to the tree and sang a song. Where did the bird fly?",
+  "options": ["River", "Tree", "House", "Car"],
+  "correct_answer": "Tree"
+  },
+  {
+  "competency": "Vocabulary",
+  "question": "What does 'happy' mean?",
+  "options": ["Sad", "Joyful", "Angry", "Tired"],
+  "correct_answer": "Joyful"
+  },
+  {
+  "competency": "Grammar",
+  "question": "Which sentence is in past tense?",
+  "options": ["I eat apple.", "I ate apple.", "I will eat apple.", "I eating apple."],
+  "correct_answer": "I ate apple."
+  },
+  {
+  "competency": "Writing Skills",
+  "question": "Which sentence has a capital letter at the beginning?",
+  "options": ["the dog runs.", "The dog runs.", "the dog Runs.", "The Dog runs."],
+  "correct_answer": "The dog runs."
+  },
+  {
+  "competency": "Physical Science",
+  "question": "What is the boiling point of water?",
+  "options": ["0°C", "100°C", "50°C", "200°C"],
+  "correct_answer": "100°C"
+  },
+  {
+  "competency": "Life Science",
+  "question": "What do animals need to survive?",
+  "options": ["Only water", "Food, water, air", "Only food", "Only air"],
+  "correct_answer": "Food, water, air"
+  },
+  {
+  "competency": "Earth Science",
+  "question": "What is the largest ocean on Earth?",
+  "options": ["Atlantic", "Pacific", "Indian", "Arctic"],
+  "correct_answer": "Pacific"
+  },
+  {
+  "competency": "Scientific Inquiry",
+  "question": "What do scientists use to test ideas?",
+  "options": ["Experiments", "Guesses", "Stories", "Dreams"],
+  "correct_answer": "Experiments"
+  },
+  {
+  "competency": "World History",
+  "question": "Who was Cleopatra?",
+  "options": ["Queen of England", "Queen of Egypt", "Queen of France", "Queen of Spain"],
+  "correct_answer": "Queen of Egypt"
+  },
+  {
+  "competency": "National History",
+  "question": "When did the American Civil War end?",
+  "options": ["1865", "1776", "1945", "1918"],
+  "correct_answer": "1865"
+  },
+  {
+  "competency": "Geography – Physical",
+  "question": "What is the tallest mountain in the world?",
+  "options": ["K2", "Everest", "Kilimanjaro", "Denali"],
+  "correct_answer": "Everest"
+  },
+  {
+  "competency": "Geography – Cultural",
+  "question": "What is the main language in Brazil?",
+  "options": ["Spanish", "Portuguese", "English", "French"],
+  "correct_answer": "Portuguese"
+  },
+  {
+  "competency": "Critical Thinking",
+  "question": "If A is bigger than B, and B is bigger than C, what is A to C?",
+  "options": ["Smaller", "Bigger", "Equal", "Unknown"],
+  "correct_answer": "Bigger"
+  },
+  {
+  "competency": "Problem Solving",
+  "question": "You have 10 candies and give away 3. How many left?",
+  "options": ["5", "6", "7", "8"],
+  "correct_answer": "7"
+  },
+  {
+  "competency": "Data Interpretation",
+  "question": "If a bar chart shows 4 red, 6 blue, total colors?",
+  "options": ["4", "6", "10", "12"],
+  "correct_answer": "10"
+  },
+  {
+  "competency": "Citizenship",
+  "question": "What is voting?",
+  "options": ["Choosing leaders", "Buying food", "Playing games", "Reading books"],
+  "correct_answer": "Choosing leaders"
+  },
+  {
+  "competency": "Basic Economics",
+  "question": "What is a budget?",
+  "options": ["Plan for money", "Type of car", "Food item", "Game"],
+  "correct_answer": "Plan for money"
+  },
+  {
+  "competency": "Digital Literacy",
+  "question": "What is a computer mouse used for?",
+  "options": ["Eating", "Pointing", "Sleeping", "Flying"],
+  "correct_answer": "Pointing"
+  }
+  ],
+  "B2": [
+  {
+  "competency": "Basic Arithmetic",
+  "question": "What is 48 ÷ 6?",
+  "options": ["6", "7", "8", "9"],
+  "correct_answer": "8"
+  },
+  {
+  "competency": "Fractions",
+  "question": "What is 2/5 of 30?",
+  "options": ["6", "12", "15", "20"],
+  "correct_answer": "12"
+  },
+  {
+  "competency": "Geometry",
+  "question": "What is the perimeter of a square with side 4?",
+  "options": ["8", "12", "16", "20"],
+  "correct_answer": "16"
+  },
+  {
+  "competency": "Algebra Basics",
+  "question": "Solve for x: 3x + 2 = 11",
+  "options": ["2", "3", "4", "5"],
+  "correct_answer": "3"
+  },
+  {
+  "competency": "Reading Comprehension",
+  "question": "The cat chased the mouse under the table. What did the cat do?",
+  "options": ["Slept", "Chased", "Ate", "Jumped"],
+  "correct_answer": "Chased"
+  },
+  {
+  "competency": "Vocabulary",
+  "question": "What does 'ancient' mean?",
+  "options": ["New", "Old", "Big", "Small"],
+  "correct_answer": "Old"
+  },
+  {
+  "competency": "Grammar",
+  "question": "Which is a complete sentence?",
+  "options": ["The quick brown.", "The quick brown fox jumps.", "Quick brown fox.", "Jumps over."],
+  "correct_answer": "The quick brown fox jumps."
+  },
+  {
+  "competency": "Writing Skills",
+  "question": "Which sentence uses a comma correctly?",
+  "options": ["I like apples bananas.", "I like apples, bananas.", "I like apples bananas,", "I, like apples bananas."],
+  "correct_answer": "I like apples, bananas."
+  },
+  {
+  "competency": "Physical Science",
+  "question": "What is the freezing point of water?",
+  "options": ["0°C", "100°C", "50°C", "200°C"],
+  "correct_answer": "0°C"
+  },
+  {
+  "competency": "Life Science",
+  "question": "What is photosynthesis?",
+  "options": ["Plants making food", "Animals eating", "Water freezing", "Rocks forming"],
+  "correct_answer": "Plants making food"
+  },
+  {
+  "competency": "Earth Science",
+  "question": "What causes earthquakes?",
+  "options": ["Wind", "Plate movements", "Rain", "Sunlight"],
+  "correct_answer": "Plate movements"
+  },
+  {
+  "competency": "Scientific Inquiry",
+  "question": "What is a hypothesis?",
+  "options": ["Tested guess", "Final answer", "Question", "Observation"],
+  "correct_answer": "Tested guess"
+  },
+  {
+  "competency": "World History",
+  "question": "What was the Roman Empire known for?",
+  "options": ["Pyramids", "Roads and laws", "Great Wall", "Vikings"],
+  "correct_answer": "Roads and laws"
+  },
+  {
+  "competency": "National History",
+  "question": "Who signed the Declaration of Independence?",
+  "options": ["George Washington", "John Hancock", "Abraham Lincoln", "Thomas Edison"],
+  "correct_answer": "John Hancock"
+  },
+  {
+  "competency": "Geography – Physical",
+  "question": "What is a volcano?",
+  "options": ["Flowing water body", "Mountain with lava", "Desert", "Forest"],
+  "correct_answer": "Mountain with lava"
+  },
+  {
+  "competency": "Geography – Cultural",
+  "question": "What is the currency in Japan?",
+  "options": ["Dollar", "Yen", "Euro", "Pound"],
+  "correct_answer": "Yen"
+  },
+  {
+  "competency": "Critical Thinking",
+  "question": "If every rose has thorns, and this flower has thorns, is it a rose?",
+  "options": ["Yes", "No", "Maybe", "Cannot tell"],
+  "correct_answer": "Cannot tell"
+  },
+  {
+  "competency": "Problem Solving",
+  "question": "If 4 books cost $20, how much for 2 books?",
+  "options": ["$5", "$10", "$15", "$20"],
+  "correct_answer": "$10"
+  },
+  {
+  "competency": "Data Interpretation",
+  "question": "If a pie chart shows 50% red, 30% blue, 20% green, what is red?",
+  "options": ["Half", "Third", "Quarter", "All"],
+  "correct_answer": "Half"
+  },
+  {
+  "competency": "Citizenship",
+  "question": "What is a law?",
+  "options": ["Rule to follow", "Game", "Story", "Song"],
+  "correct_answer": "Rule to follow"
+  },
+  {
+  "competency": "Basic Economics",
+  "question": "What is supply and demand?",
+  "options": ["How prices work", "Types of food", "Colors", "Animals"],
+  "correct_answer": "How prices work"
+  },
+  {
+  "competency": "Digital Literacy",
+  "question": "What is the internet?",
+  "options": ["Network of computers", "Type of car", "Food", "Animal"],
+  "correct_answer": "Network of computers"
+  }
+  ],
+  "C1": [
+  {
+  "competency": "Basic Arithmetic",
+  "question": "What is 123 + 456?",
+  "options": ["579", "580", "581", "582"],
+  "correct_answer": "579"
+  },
+  {
+  "competency": "Fractions",
+  "question": "Simplify 4/8",
+  "options": ["1/2", "2/4", "4/8", "8/4"],
+  "correct_answer": "1/2"
+  },
+  {
+  "competency": "Geometry",
+  "question": "What is the volume of a cube with side 2?",
+  "options": ["4", "6", "8", "10"],
+  "correct_answer": "8"
+  },
+  {
+  "competency": "Algebra Basics",
+  "question": "Solve for x: 5x - 10 = 15",
+  "options": ["4", "5", "6", "7"],
+  "correct_answer": "5"
+  },
+  {
+  "competency": "Reading Comprehension",
+  "question": "The book was on the shelf, next to the lamp. Where was the book?",
+  "options": ["Floor", "Shelf", "Table", "Chair"],
+  "correct_answer": "Shelf"
+  },
+  {
+  "competency": "Vocabulary",
+  "question": "What does 'enormous' mean?",
+  "options": ["Small", "Huge", "Medium", "Tiny"],
+  "correct_answer": "Huge"
+  },
+  {
+  "competency": "Grammar",
+  "question": "Which is future tense?",
+  "options": ["I ate", "I eat", "I will eat", "I eating"],
+  "correct_answer": "I will eat"
+  },
+  {
+  "competency": "Writing Skills",
+  "question": "Which sentence has an exclamation mark?",
+  "options": ["Hello.", "Hello?", "Hello!", "Hello"],
+  "correct_answer": "Hello!"
+  },
+  {
+  "competency": "Physical Science",
+  "question": "What is gravity?",
+  "options": ["Force pulling down", "Wind blowing", "Light shining", "Sound waving"],
+  "correct_answer": "Force pulling down"
+  },
+  {
+  "competency": "Life Science",
+  "question": "What is the heart for?",
+  "options": ["Pumping blood", "Thinking", "Walking", "Seeing"],
+  "correct_answer": "Pumping blood"
+  },
+  {
+  "competency": "Earth Science",
+  "question": "What is erosion?",
+  "options": ["Wearing away of land", "Building mountains", "Plant growth", "Animal movement"],
+  "correct_answer": "Wearing away of land"
+  },
+  {
+  "competency": "Scientific Inquiry",
+  "question": "What is data?",
+  "options": ["Information collected", "Guess", "Story", "Picture"],
+  "correct_answer": "Information collected"
+  },
+  {
+  "competency": "World History",
+  "question": "What was the Renaissance?",
+  "options": ["Time of art and learning", "War period", "Ice age", "Dinosaur era"],
+  "correct_answer": "Time of art and learning"
+  },
+  {
+  "competency": "National History",
+  "question": "What is the Bill of Rights?",
+  "options": ["Amendments to Constitution", "Type of money", "List of presidents", "Map of states"],
+  "correct_answer": "Amendments to Constitution"
+  },
+  {
+  "competency": "Geography – Physical",
+  "question": "What is a river?",
+  "options": ["Flowing water body", "Mountain", "Desert", "Forest"],
+  "correct_answer": "Flowing water body"
+  },
+  {
+  "competency": "Geography – Cultural",
+  "question": "What is the population of China?",
+  "options": ["Over 1 billion", "Under 1 million", "10 million", "100 million"],
+  "correct_answer": "Over 1 billion"
+  },
+  {
+  "competency": "Critical Thinking",
+  "question": "If all dogs bark, and Spot barks, is Spot a dog?",
+  "options": ["Yes", "No", "Maybe", "Cannot tell"],
+  "correct_answer": "Cannot tell"
+  },
+  {
+  "competency": "Problem Solving",
+  "question": "If 5 shirts cost $30, how much for 1 shirt?",
+  "options": ["$5", "$6", "$7", "$8"],
+  "correct_answer": "$6"
+  },
+  {
+  "competency": "Data Interpretation",
+  "question": "If a line graph shows increasing temperature, what is happening?",
+  "options": ["Getting colder", "Getting hotter", "Staying same", "Unknown"],
+  "correct_answer": "Getting hotter"
+  },
+  {
+  "competency": "Citizenship",
+  "question": "What is democracy?",
+  "options": ["Rule by people", "Rule by king", "Rule by army", "Rule by animals"],
+  "correct_answer": "Rule by people"
+  },
+  {
+  "competency": "Basic Economics",
+  "question": "What is inflation?",
+  "options": ["Rising prices", "Falling prices", "Stable prices", "No prices"],
+  "correct_answer": "Rising prices"
+  },
+  {
+  "competency": "Digital Literacy",
+  "question": "What is a browser?",
+  "options": ["Program to view web", "Type of book", "Food", "Animal"],
+  "correct_answer": "Program to view web"
+  }
+  ],
+  "C2": [
+  {
+  "competency": "Basic Arithmetic",
+  "question": "What is 99 - 47?",
+  "options": ["50", "51", "52", "53"],
+  "correct_answer": "52"
+  },
+  {
+  "competency": "Fractions",
+  "question": "What is 5/8 - 1/8?",
+  "options": ["3/8", "4/8", "5/8", "6/8"],
+  "correct_answer": "4/8"
+  },
+  {
+  "competency": "Geometry",
+  "question": "What is the circumference of a circle with radius 1 (use π=3)?",
+  "options": ["3", "6", "9", "12"],
+  "correct_answer": "6"
+  },
+  {
+  "competency": "Algebra Basics",
+  "question": "Solve for x: 4x = 20",
+  "options": ["4", "5", "6", "7"],
+  "correct_answer": "5"
+  },
+  {
+  "competency": "Reading Comprehension",
+  "question": "The train arrived at the station on time. When did the train arrive?",
+  "options": ["Late", "On time", "Early", "Never"],
+  "correct_answer": "On time"
+  },
+  {
+  "competency": "Vocabulary",
+  "question": "What does 'magnificent' mean?",
+  "options": ["Ugly", "Beautiful", "Small", "Loud"],
+  "correct_answer": "Beautiful"
+  },
+  {
+  "competency": "Grammar",
+  "question": "Which sentence is correct?",
+  "options": ["He go to school.", "He goes to school.", "He going to school.", "He gone to school."],
+  "correct_answer": "He goes to school."
+  },
+  {
+  "competency": "Writing Skills",
+  "question": "Which sentence has a question mark?",
+  "options": ["What is your name.", "What is your name?", "What is your name!", "What is your name"],
+  "correct_answer": "What is your name?"
+  },
+  {
+  "competency": "Physical Science",
+  "question": "What is energy?",
+  "options": ["Ability to do work", "Type of food", "Color", "Animal"],
+  "correct_answer": "Ability to do work"
+  },
+  {
+  "competency": "Life Science",
+  "question": "What is DNA?",
+  "options": ["Genetic material", "Type of food", "Rock", "Planet"],
+  "correct_answer": "Genetic material"
+  },
+  {
+  "competency": "Earth Science",
+  "question": "What is the atmosphere?",
+  "options": ["Layer of air around Earth", "Ocean", "Mountain", "Desert"],
+  "correct_answer": "Layer of air around Earth"
+  },
+  {
+  "competency": "Scientific Inquiry",
+  "question": "What is a conclusion?",
+  "options": ["Final decision based on data", "Guess", "Question", "Experiment"],
+  "correct_answer": "Final decision based on data"
+  },
+  {
+  "competency": "World History",
+  "question": "What was World War I?",
+  "options": ["Global war in 1914-1918", "Local fight", "Party", "Game"],
+  "correct_answer": "Global war in 1914-1918"
+  },
+  {
+  "competency": "National History",
+  "question": "What is the U.S. Constitution?",
+  "options": ["Supreme law of the land", "Book", "Song", "Movie"],
+  "correct_answer": "Supreme law of the land"
+  },
+  {
+  "competency": "Geography – Physical",
+  "question": "What is a continent?",
+  "options": ["Large landmass", "Small island", "River", "Tree"],
+  "correct_answer": "Large landmass"
+  },
+  {
+  "competency": "Geography – Cultural",
+  "question": "What is the main religion in India?",
+  "options": ["Hinduism", "Christianity", "Islam", "Buddhism"],
+  "correct_answer": "Hinduism"
+  },
+  {
+  "competency": "Critical Thinking",
+  "question": "What is the opposite of hot?",
+  "options": ["Warm", "Cold", "Big", "Small"],
+  "correct_answer": "Cold"
+  },
+  {
+  "competency": "Problem Solving",
+  "question": "If a bus leaves at 9 AM and takes 2 hours, when does it arrive?",
+  "options": ["10 AM", "11 AM", "12 PM", "1 PM"],
+  "correct_answer": "11 AM"
+  },
+  {
+  "competency": "Data Interpretation",
+  "question": "If a table shows sales increasing, what is happening?",
+  "options": ["Sales decreasing", "Sales stable", "Sales rising", "Unknown"],
+  "correct_answer": "Sales rising"
+  },
+  {
+  "competency": "Citizenship",
+  "question": "What is freedom of speech?",
+  "options": ["Right to say what you think", "Right to run", "Right to eat", "Right to sleep"],
+  "correct_answer": "Right to say what you think"
+  },
+  {
+  "competency": "Basic Economics",
+  "question": "What is a market?",
+  "options": ["Place to buy/sell", "Type of animal", "Color", "Song"],
+  "correct_answer": "Place to buy/sell"
+  },
+  {
+  "competency": "Digital Literacy",
+  "question": "What is email?",
+  "options": ["Electronic mail", "Type of food", "Animal", "Car"],
+  "correct_answer": "Electronic mail"
+  }
+  ]
+  }
