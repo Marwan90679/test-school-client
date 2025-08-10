@@ -6,6 +6,7 @@ import QuizContent from "../Components/QuizContent";
 import QuizNavigation from "../Components/QuizNavigation";
 import QuizResults from "../Components/QuizResults";
 import { getTestResults } from "../utils/scoringRules";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const getRandomSample = (array, size) => {
   if (!array || array.length === 0) return [];
@@ -18,6 +19,7 @@ const Quiz = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
   const [userData, setUserData] = useState(null);
   const [hasFailed, setHasFailed] = useState(false);
@@ -35,12 +37,11 @@ const Quiz = () => {
 
   useEffect(() => {
     if (user && user.email) {
-      fetch(`http://localhost:5000/users/data?email=${user.email}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setUserData(data);
-          // Correcting the case to match the user data provided
-          const failed = data.certificates?.includes("Failed") || false;
+      axiosSecure
+        .get("/users/data", { params: { email: user.email } })
+        .then((res) => {
+          setUserData(res.data);
+          const failed = res.data.certificates?.includes("Failed") || false;
           setHasFailed(failed);
         })
         .catch((err) => {
@@ -50,16 +51,14 @@ const Quiz = () => {
     } else {
       setIsLoading(false);
     }
-  }, [user]);
+  }, [user, axiosSecure]);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch("http://localhost:5000/");
-        const data = await response.json();
-
-        // Assuming the API returns an array with one document containing all levels
-        const quizData = data[0]; // Access the first (and likely only) document
+        const response = await axiosSecure.get("/");
+        const data = response.data;
+        const quizData = data[0];
 
         let combinedQuestions = [];
         if (testId === "step1") {
@@ -78,19 +77,15 @@ const Quiz = () => {
 
         const searchParams = new URLSearchParams(location.search);
         const customTimerPerQuestion = parseInt(searchParams.get("timer"), 10);
-
         const timerPerQuestion =
           !isNaN(customTimerPerQuestion) && customTimerPerQuestion > 0
             ? customTimerPerQuestion
             : 60;
-
         const testDuration = combinedQuestions.length * timerPerQuestion;
 
         setQuestions(combinedQuestions);
         setTimeLeft(testDuration);
         setIsLoading(false);
-
-        // Resetting other states for a fresh quiz instance.
         setShowResults(false);
         setSelectedAnswers({});
         setCurrentQuestionIndex(0);
@@ -103,17 +98,14 @@ const Quiz = () => {
         setIsLoading(false);
       }
     };
-    // Only fetch questions if the user exists and has not failed
+
     if (userData && !hasFailed) {
       fetchQuestions();
     } else if (userData && hasFailed) {
-      // This ensures that if the user has failed, isLoading is set to false
-      // so the component can proceed to the next rendering block.
       setIsLoading(false);
     }
-  }, [userData, hasFailed, testId, location.search]);
+  }, [userData, hasFailed, testId, location.search, axiosSecure]);
 
-  // Timer countdown logic
   useEffect(() => {
     if (isTimerRunning && timeLeft > 0 && !showResults && !showTransition) {
       const timerId = setInterval(() => {
@@ -123,7 +115,6 @@ const Quiz = () => {
     }
   }, [timeLeft, isTimerRunning, showResults, showTransition]);
 
-  // Auto-submit logic when timer hits zero
   useEffect(() => {
     if (typeof timeLeft === "number" && timeLeft === 0 && isTimerRunning) {
       handleSubmitQuiz();
@@ -198,14 +189,10 @@ const Quiz = () => {
 
     if (user) {
       if (testId === "step1" && results.certificationLevel === "Fail") {
-       
         try {
-          await fetch(
-            `http://localhost:5000/users/mark-failed?email=${user.email}`,
-            {
-              method: "PATCH",
-            }
-          );
+          await axiosSecure.patch("/users/mark-failed", null, {
+            params: { email: user.email },
+          });
           console.log(`User ${user.email} marked as Failed.`);
         } catch (error) {
           console.error("Failed to mark user as Failed:", error);
@@ -214,18 +201,16 @@ const Quiz = () => {
         results.certificationLevel &&
         results.certificationLevel !== "None"
       ) {
-        // Existing certificate patch logic
         let certificateToPatch = results.certificationLevel;
         if (certificateToPatch === "Fail") {
           certificateToPatch = "Failed";
         }
         try {
-          const apiUrl = `http://localhost:5000/users/certificates?email=${user.email}`;
-          await fetch(apiUrl, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ certificate: certificateToPatch }),
-          });
+          await axiosSecure.patch(
+            "/users/certificates",
+            { certificate: certificateToPatch },
+            { params: { email: user.email } }
+          );
         } catch (error) {
           console.error("Failed to patch user certificate:", error);
         }
@@ -236,7 +221,6 @@ const Quiz = () => {
   };
 
   const onProceedToNext = () => {
-    // Reset the state to show the quiz again
     setShowResults(false);
     const nextStepId = `step${parseInt(testId.replace("step", "")) + 1}`;
     const searchParams = new URLSearchParams(location.search);
@@ -244,14 +228,11 @@ const Quiz = () => {
     navigate(`/quiz/${nextStepId}?timer=${timer}`);
   };
 
-  // Renders the "Access Denied" page immediately if the user has failed.
   if (hasFailed) {
     return (
       <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
         <div className="text-center p-8 bg-gray-800 rounded-lg shadow-xl">
-          <h2 className="text-3xl font-bold mb-4 text-red-400">
-            Access Denied
-          </h2>
+          <h2 className="text-3xl font-bold mb-4 text-red-400">Access Denied</h2>
           <p className="text-lg">
             We're sorry, you have a **Failed** status and cannot retake any
             quizzes or proceed at this time.
@@ -260,7 +241,7 @@ const Quiz = () => {
       </div>
     );
   }
-  // Now, check for loading only after we know the user hasn't failed.
+
   if (isLoading || timeLeft === null) {
     return (
       <div className="text-center p-8 min-h-screen bg-gray-900 text-white flex items-center justify-center">

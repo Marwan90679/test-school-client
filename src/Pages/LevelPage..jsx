@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router";
 import { Settings, X } from "lucide-react";
 import { AuthContext } from "../Contexts/AuthContext";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const LevelPage = () => {
+    const axiosSecure = useAxiosSecure();
     const { user } = useContext(AuthContext);
     const [userData, setUserData] = useState(null);
     const [openSettingsFor, setOpenSettingsFor] = useState(null);
@@ -14,14 +16,17 @@ const LevelPage = () => {
         step3: 60,
     });
 
+  
     useEffect(() => {
-        if (user && user.email) {
-            fetch(`http://localhost:5000/users/data?email=${user.email}`)
-                .then(res => res.json())
-                .then(data => setUserData(data))
-                .catch(err => console.error(err));
-        }
+      if (user && user.email) {
+        axiosSecure.get("/users/data", {
+          params: { email: user.email }
+        })
+        .then(res => setUserData(res.data))
+        .catch(err => console.error(err));
+      }
     }, [user]);
+    
 
     if (!userData) {
         return <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">Loading...</div>;

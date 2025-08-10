@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 
@@ -28,7 +29,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { createUser, loading, setLoading, updateUserInfo } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const axiosSecure = useAxiosSecure();
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -46,13 +47,9 @@ const SignUp = () => {
       // Update the user's profile with the name and avatar URL
       await updateUserInfo({ displayName: name, photoURL: avatarUrl });
 
-      const response = await fetch("http://localhost:5000/signUp", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+      
+      const response = await axiosSecure.post("/signUp", payload);
+      
 
       const result = await response.json();
 
