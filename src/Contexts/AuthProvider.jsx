@@ -3,18 +3,17 @@ import { AuthContext } from "./AuthContext";
 import { auth } from "../Firebase/firebase.init";
 import {
   createUserWithEmailAndPassword,
-  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-
   signOut,
   updateProfile,
 } from "firebase/auth";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [success,setSuccess] = useState(null);
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -38,13 +37,23 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+        if (currentUser?.email) {
+        const userData = { email: currentUser?.email };
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/jwt`, userData, {
+            withCredentials: true,
+          })
+          .then((res) => setSuccess(res.data))
+          .catch((error) => console.log(error));
+      }
     });
-    return () => unsubscribe();
+    return () => {
+      unSubscribe();
+    };
   }, []);
 
   const userInfo = {
@@ -56,7 +65,6 @@ const AuthProvider = ({ children }) => {
     loading,
     setLoading,
     updateUserInfo,
-   
   };
 
   return (
