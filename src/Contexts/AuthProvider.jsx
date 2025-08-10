@@ -5,9 +5,8 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
-  sendEmailVerification,
   signInWithEmailAndPassword,
-  signInWithPopup,
+
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -39,13 +38,6 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const verifyEmail = () => {
-    setLoading(true);
-    return sendEmailVerification(auth.currentUser, {
-      url: `${window.location.origin}/dashboard`,
-      handleCodeInApp: true,
-    });
-  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -64,7 +56,7 @@ const AuthProvider = ({ children }) => {
     loading,
     setLoading,
     updateUserInfo,
-    verifyEmail,
+   
   };
 
   return (

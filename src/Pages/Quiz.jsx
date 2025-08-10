@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router';
+import { AuthContext } from '../Contexts/AuthContext'; 
 import { AssessmentHeader } from "../Components/AssessmentHeader";
-import { ProgressBar } from "../Components/ProgressBar";
-import { QuestionCard } from "../Components/QuestionCard";
-import { ChevronLeft, ChevronRight, Flag } from "lucide-react";
-import { Button } from "../Components/Button";
-import { Card } from "../Components/Card";
+import QuizContent from "../Components/QuizContent";
+import QuizNavigation from "../Components/QuizNavigation";
+import QuizResults from "../Components/QuizResults";
 import { getTestResults } from '../utils/scoringRules';
-
 
 // Utility function to get a random sample from an array
 const getRandomSample = (array, size) => {
@@ -21,6 +19,9 @@ const Quiz = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    // Get the user object from the AuthContext to access the email
+    const { user } = useContext(AuthContext);
+
     const [questions, setQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -29,7 +30,10 @@ const Quiz = () => {
     const [timeLeft, setTimeLeft] = useState(null); 
     const [isTimerRunning, setIsTimerRunning] = useState(true);
     const [finalResults, setFinalResults] = useState(null);
+    const [isPatching, setIsPatching] = useState(false);
 
+    // This effect runs whenever the quiz ID or location search params change.
+    // It fetches new questions and resets the state for a fresh quiz.
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
@@ -61,8 +65,16 @@ const Quiz = () => {
                 const testDuration = combinedQuestions.length * timerPerQuestion;
                 
                 setQuestions(combinedQuestions);
-                setTimeLeft(testDuration); // The timer now starts only after questions are loaded
+                setTimeLeft(testDuration);
                 setIsLoading(false);
+                
+                // Resetting other states for a fresh quiz instance.
+                setShowResults(false);
+                setSelectedAnswers({});
+                setCurrentQuestionIndex(0);
+                setIsTimerRunning(true);
+                setFinalResults(null);
+
             } catch (error) {
                 console.error("Error loading questions:", error);
                 setIsLoading(false);
@@ -83,8 +95,6 @@ const Quiz = () => {
 
     // Auto-submit logic when timer hits zero
     useEffect(() => {
-        // This check is the key fix. It only runs if timeLeft is a number and is 0.
-        // It will not run on the initial render when timeLeft is null.
         if (typeof timeLeft === 'number' && timeLeft === 0 && isTimerRunning) {
             handleSubmitQuiz();
         }
@@ -117,13 +127,52 @@ const Quiz = () => {
         return correctAnswers;
     };
     
-    const handleSubmitQuiz = () => {
+    const handleSubmitQuiz = async () => {
         setIsTimerRunning(false);
         const correctAnswers = calculateCorrectAnswers();
         const results = getTestResults(testId, correctAnswers, questions.length);
         setFinalResults(results);
+
+        // New logic: Check for certification and patch user data
+        if (user && results.certificationLevel) {
+            setIsPatching(true);
+            try {
+                // The API URL now uses the user's email as a query parameter
+                const apiUrl = `http://localhost:5000/users/certificates?email=${user.email}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ certificate: results.certificationLevel }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Failed to patch user certificate');
+                }
+
+                console.log(`Successfully patched certificate for user ${user.email}`);
+            } catch (error) {
+                console.error("Failed to patch user certificate:", error);
+            } finally {
+                setIsPatching(false);
+            }
+        }
+        
         setShowResults(true);
     };
+
+    const onProceedToNext = () => {
+        // Reset the state to show the quiz again
+        setShowResults(false);
+        const nextStepId = `step${parseInt(testId.replace('step', '')) + 1}`;
+        const searchParams = new URLSearchParams(location.search);
+        const timer = searchParams.get('timer') || '60';
+        navigate(`/quiz/${nextStepId}?timer=${timer}`);
+    };
+
 
     if (isLoading || timeLeft === null) {
         return (
@@ -131,60 +180,12 @@ const Quiz = () => {
                 Loading questions for {testId}...
             </div>
         );
-        
     }
-    
-    const handleProceedToNext = () => {
-        navigate(`/quiz/step${parseInt(testId.replace('step', '')) + 1}`);
-    };
     
     if (showResults) {
-        return (
-            <div className="min-h-screen bg-gray-900 text-white p-8 flex flex-col justify-center items-center">
-                <div className="max-w-2xl mx-auto text-center space-y-6">
-                    <h1 className="text-5xl font-extrabold text-white">
-                        {testId.toUpperCase()} Results
-                    </h1>
-                    <p className="text-2xl font-bold text-gray-400">
-                        {finalResults.message}
-                    </p>
-                    <div className="bg-gray-800 p-8 rounded-lg shadow-xl space-y-4">
-                        <div className="flex justify-between items-center text-xl">
-                            <span className="font-semibold">Correct Answers:</span>
-                            <span className="text-green-400 font-bold">{finalResults.correctAnswers} / {finalResults.totalQuestions}</span>
-                        </div>
-                        <div className="flex justify-between items-center text-xl">
-                            <span className="font-semibold">Score:</span>
-                            <span className="text-purple-400 font-bold">{finalResults.percentage.toFixed(2)}%</span>
-                        </div>
-                        <div className="flex justify-between items-center text-xl">
-                            <span className="font-semibold">Certification Level:</span>
-                            <span className="text-amber-400 font-bold">{finalResults.certificationLevel}</span>
-                        </div>
-                    </div>
-                    <div className="flex justify-center gap-4 mt-8">
-                        {finalResults.canProceed && (
-                            <Button
-                                onClick={handleProceedToNext}
-                                className="bg-gradient-primary"
-                            >
-                                Proceed to Next Test
-                            </Button>
-                        )}
-                        <Button
-                            variant="outline"
-                            onClick={() => navigate('/')}
-                        >
-                            Back to Home
-                        </Button>
-                    </div>
-                </div>
-            </div>
-        );
+        return <QuizResults testId={testId} finalResults={finalResults} navigate={navigate} onProceedToNext={onProceedToNext} isPatching={isPatching} />;
     }
 
-    const currentQuestion = questions[currentQuestionIndex];
-    const isLastQuestion = currentQuestionIndex === questions.length - 1;
     const selectedAnswer = selectedAnswers[currentQuestionIndex];
 
     return (
@@ -193,67 +194,25 @@ const Quiz = () => {
                 timeLeft={timeLeft}
                 onTimeUp={handleSubmitQuiz}
                 isTimerRunning={isTimerRunning}
-                onLogout={() => navigate('/')}
+            
             />
             <div className="container mx-auto px-6 py-8">
-                <div className="max-w-4xl mx-auto space-y-8">
-                    <ProgressBar
-                        current={currentQuestionIndex + 1}
-                        total={questions.length}
-                        step={testId.toUpperCase()}
-                    />
-                    {currentQuestion && (
-                        <QuestionCard
-                            question={currentQuestion}
-                            selectedAnswer={selectedAnswer}
-                            onAnswerSelect={handleAnswerSelect}
-                            questionNumber={currentQuestionIndex + 1}
-                        />
-                    )}
-                    <Card className="p-6 shadow-medium">
-                        <div className="flex items-center justify-between">
-                            <Button
-                                variant="outline"
-                                onClick={handlePreviousQuestion}
-                                disabled={currentQuestionIndex === 0}
-                                className="gap-2"
-                            >
-                                <ChevronLeft className="h-4 w-4" />
-                                Previous
-                            </Button>
-                            <div className="flex gap-3">
-                                <Button
-                                    variant="outline"
-                                    onClick={handleSubmitQuiz}
-                                    className="gap-2 text-destructive border-destructive hover:bg-destructive hover:text-destructive-foreground"
-                                >
-                                    <Flag className="h-4 w-4" />
-                                    Submit Test
-                                </Button>
-                                {isLastQuestion ? (
-                                    <Button
-                                        onClick={handleSubmitQuiz}
-                                        disabled={!selectedAnswer}
-                                        className="gap-2 bg-success text-success-foreground"
-                                    >
-                                        Finish Test
-                                        <Flag className="h-4 w-4" />
-                                    </Button>
-                                ) : (
-                                    <Button
-                                        onClick={handleNextQuestion}
-                                        disabled={!selectedAnswer}
-                                        className="gap-2 bg-gradient-primary"
-                                    >
-                                        Next
-                                        <ChevronRight className="h-4 w-4" />
-                                    </Button>
-                                )}
-                            </div>
-                        </div>
-                    </Card>
-                </div>
+                <QuizContent
+                    currentQuestionIndex={currentQuestionIndex}
+                    questions={questions}
+                    selectedAnswer={selectedAnswer}
+                    onAnswerSelect={handleAnswerSelect}
+                    testId={testId}
+                />
             </div>
+            <QuizNavigation
+                currentQuestionIndex={currentQuestionIndex}
+                totalQuestions={questions.length}
+                selectedAnswer={selectedAnswer}
+                onPrevious={handlePreviousQuestion}
+                onNext={handleNextQuestion}
+                onSubmit={handleSubmitQuiz}
+            />
         </div>
     );
 };

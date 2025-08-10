@@ -3,7 +3,7 @@ import { Button } from './Button';
 import Logo from './Logo';
 
 
-export const AssessmentHeader = ({ timeLeft, onTimeUp, isTimerRunning, onLogout }) => {
+export const AssessmentHeader = ({ timeLeft, onTimeUp, isTimerRunning}) => {
   useEffect(() => {
     if (!isTimerRunning) return;
 
@@ -29,8 +29,8 @@ export const AssessmentHeader = ({ timeLeft, onTimeUp, isTimerRunning, onLogout 
         <Logo/>
         <h1 className="text-xl font-bold">Quiz Assessment</h1>
         <div className="flex items-center space-x-4">
-          <div className="text-sm">Time Left: {formatTime(timeLeft)}</div>
-          <Button variant="outline" onClick={onLogout}>Logout</Button>
+          <div className="text-sm bg-red-600 font-bold py-3 px-2 rounded-lg text-white">Time Left: {formatTime(timeLeft)}</div>
+
         </div>
       </div>
     </header>
