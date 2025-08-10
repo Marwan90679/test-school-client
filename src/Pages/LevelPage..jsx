@@ -1,21 +1,56 @@
-import React, { useState } from "react";
-import { Link } from "react-router"; // Use react-router-dom for Link
-import { Settings, X } from "lucide-react"; // Import a settings icon and a close icon
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router";
+import { Settings, X } from "lucide-react";
+import { AuthContext } from "../Contexts/AuthContext";
+
 
 const LevelPage = () => {
-    // Hardcoded test data, representing your steps
-    const tests = [
-        { id: 'step1', name: 'Step 1: A1 & A2', description: 'Total 44 questions, 44 minutes', unlocked: true },
-        { id: 'step2', name: 'Step 2: B1 & B2', description: 'Complete Step 1 to unlock', unlocked: true }, 
-        { id: 'step3', name: 'Step 3: C1 & C2', description: 'Complete Step 2 to unlock', unlocked: true }, 
-    ];
-
-    // State to manage the open modal and the custom timer settings
+    const { user } = useContext(AuthContext);
+    const [userData, setUserData] = useState(null);
     const [openSettingsFor, setOpenSettingsFor] = useState(null);
     const [timerSettings, setTimerSettings] = useState({
-        step1: 60, // Default 60 seconds per question
+        step1: 60,
         step2: 60,
+        step3: 60,
     });
+
+    useEffect(() => {
+        if (user && user.email) {
+            fetch(`http://localhost:5000/users/data?email=${user.email}`)
+                .then(res => res.json())
+                .then(data => setUserData(data))
+                .catch(err => console.error(err));
+        }
+    }, [user]);
+
+    if (!userData) {
+        return <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">Loading...</div>;
+    }
+
+    const certificates = userData.certificates || [];
+    const hasA2 = certificates.includes('A2');
+    const hasB2 = certificates.includes('B2');
+
+    const tests = [
+        {
+            id: 'step1',
+            name: 'Step 1: A1 & A2',
+            unlocked: true,
+            description: 'Total 44 questions, 44 minutes',
+        },
+        {
+            id: 'step2',
+            name: 'Step 2: B1 & B2',
+            unlocked: hasA2,
+            description: hasA2 ? 'Total 44 questions, 44 minutes' : 'Complete Step 1 to unlock',
+        },
+        {
+            id: 'step3',
+            name: 'Step 3: C1 & C2',
+            unlocked: hasB2,
+            description: hasB2 ? 'Total 44 questions, 44 minutes' : 'Complete Steps 1 & 2 to unlock',
+        },
+    ];
 
     const handleTimerChange = (testId, value) => {
         setTimerSettings(prev => ({
@@ -57,12 +92,13 @@ const LevelPage = () => {
 
                         {/* Settings button */}
                         <button
+                            disabled={!test.unlocked}
                             onClick={(e) => {
                                 e.preventDefault(); // Prevent link from navigating
                                 e.stopPropagation(); // Stop event from bubbling to parent link
                                 setOpenSettingsFor(openSettingsFor === test.id ? null : test.id);
                             }}
-                            className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                            className={`${!test.unlocked && 'cursor-not-allowed opacity-50'} absolute top-4 right-4 text-gray-400 hover:text-white transition-colors`}
                         >
                             <Settings size={20} />
                         </button>
