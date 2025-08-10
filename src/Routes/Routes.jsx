@@ -6,6 +6,7 @@ import SignUp from "../Authentication/SignUp";
 import Quiz from "../Pages/Quiz";
 import MainLayouts from "../Layouts/MainLayouts";
 import Certificate from "../Pages/Certificate";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "levelSelection",
-        Component: LevelPage,
+        element:<PrivateRoute><LevelPage></LevelPage></PrivateRoute>
       },
 
       {
@@ -31,12 +32,12 @@ export const router = createBrowserRouter([
       },
       {
         path:'certificates',
-        Component:Certificate
+        element:<PrivateRoute><Certificate></Certificate></PrivateRoute>
       }
     ],
   },
   {
     path:'quiz/:id',
-    Component:Quiz
+    element:<PrivateRoute><Quiz></Quiz></PrivateRoute>
   },
 ]);

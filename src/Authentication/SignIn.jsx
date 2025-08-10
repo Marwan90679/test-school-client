@@ -10,22 +10,25 @@ import {
   Loader2,
   Home,
 } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 
 const SignIn = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+ console.log(location)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const { signIn, loading, googleSignIn } = useContext(AuthContext);
+  const { signIn, loading} = useContext(AuthContext);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     try {
       await signIn(email, password);
-      // Navigate to dashboard or home on success
+      navigate(location.state || "/");
     } catch (err) {
       console.error("Auth error:", err);
       setError("Sign In failed. Please check your email and password.");
