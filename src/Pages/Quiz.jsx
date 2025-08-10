@@ -6,6 +6,8 @@ import { QuestionCard } from "../Components/QuestionCard";
 import { ChevronLeft, ChevronRight, Flag } from "lucide-react";
 import { Button } from "../Components/Button";
 import { Card } from "../Components/Card";
+import { getTestResults } from '../utils/scoringRules';
+
 
 // Utility function to get a random sample from an array
 const getRandomSample = (array, size) => {
@@ -24,8 +26,9 @@ const Quiz = () => {
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [showResults, setShowResults] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(0);
+    const [timeLeft, setTimeLeft] = useState(null); 
     const [isTimerRunning, setIsTimerRunning] = useState(true);
+    const [finalResults, setFinalResults] = useState(null);
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -34,29 +37,31 @@ const Quiz = () => {
                 const data = await response.json();
                 
                 let combinedQuestions = [];
-                let testDuration = 0;
-                
                 if (testId === 'step1') {
-                    // Use the getRandomSample function to select 2 questions from each level
                     const a1Sample = getRandomSample(data.A1, 2);
                     const a2Sample = getRandomSample(data.A2, 2);
                     combinedQuestions = [...a1Sample, ...a2Sample];
+                } else if (testId === 'step2') {
+                    const b1Sample = getRandomSample(data.B1, 2);
+                    const b2Sample = getRandomSample(data.B2, 2);
+                    combinedQuestions = [...b1Sample, ...b2Sample];
+                } else if (testId === 'step3') {
+                    const c1Sample = getRandomSample(data.C1, 2);
+                    const c2Sample = getRandomSample(data.C2, 2);
+                    combinedQuestions = [...c1Sample, ...c2Sample];
                 }
-                // Add logic for other steps here, e.g., 'step2'
                 
-                // Read the timer setting from the URL query parameters
                 const searchParams = new URLSearchParams(location.search);
                 const customTimerPerQuestion = parseInt(searchParams.get('timer'), 10);
                 
-                // Use custom timer if it's a valid number, otherwise default to 60 seconds
                 const timerPerQuestion = !isNaN(customTimerPerQuestion) && customTimerPerQuestion > 0
                     ? customTimerPerQuestion
                     : 60;
                 
-                testDuration = combinedQuestions.length * timerPerQuestion;
+                const testDuration = combinedQuestions.length * timerPerQuestion;
                 
                 setQuestions(combinedQuestions);
-                setTimeLeft(testDuration);
+                setTimeLeft(testDuration); // The timer now starts only after questions are loaded
                 setIsLoading(false);
             } catch (error) {
                 console.error("Error loading questions:", error);
@@ -65,6 +70,26 @@ const Quiz = () => {
         };
         fetchQuestions();
     }, [testId, location.search]);
+
+    // Timer countdown logic
+    useEffect(() => {
+        if (isTimerRunning && timeLeft > 0 && !showResults) {
+            const timerId = setInterval(() => {
+                setTimeLeft(prevTime => prevTime - 1);
+            }, 1000);
+            return () => clearInterval(timerId);
+        }
+    }, [timeLeft, isTimerRunning, showResults]);
+
+    // Auto-submit logic when timer hits zero
+    useEffect(() => {
+        // This check is the key fix. It only runs if timeLeft is a number and is 0.
+        // It will not run on the initial render when timeLeft is null.
+        if (typeof timeLeft === 'number' && timeLeft === 0 && isTimerRunning) {
+            handleSubmitQuiz();
+        }
+    }, [timeLeft, isTimerRunning]);
+
 
     const handleAnswerSelect = (answer) => {
         setSelectedAnswers({...selectedAnswers, [currentQuestionIndex]: answer});
@@ -82,59 +107,35 @@ const Quiz = () => {
         }
     };
 
-    const calculateFinalResult = () => {
+    const calculateCorrectAnswers = () => {
         let correctAnswers = 0;
         questions.forEach((question, index) => {
             if (selectedAnswers[index] === question.correct_answer) {
                 correctAnswers++;
             }
         });
-
-        const totalQuestions = questions.length;
-        const percentage = (correctAnswers / totalQuestions) * 100;
-        let certificationLevel = "None";
-        let message = "You did not achieve a passing score.";
-        let canProceed = false;
-        
-        if (testId === 'step1') {
-            if (percentage >= 75) {
-                certificationLevel = "A2";
-                message = "Congratulations! You are certified at the A2 level and can proceed to the next step.";
-                canProceed = true;
-            } else if (percentage >= 50) {
-                certificationLevel = "A2";
-                message = "Congratulations! You are certified at the A2 level, but you need a higher score to unlock the next test.";
-            } else if (percentage >= 25) {
-                certificationLevel = "A1";
-                message = "You are certified at the A1 level. To advance, you should retake the test and aim for a higher score.";
-            } else {
-                certificationLevel = "Fail";
-                message = "Your score is below the minimum certification threshold. You have not been certified for this level.";
-            }
-        }
-        
-        return { correctAnswers, totalQuestions, percentage, certificationLevel, message, canProceed };
+        return correctAnswers;
     };
-
+    
     const handleSubmitQuiz = () => {
         setIsTimerRunning(false);
+        const correctAnswers = calculateCorrectAnswers();
+        const results = getTestResults(testId, correctAnswers, questions.length);
+        setFinalResults(results);
         setShowResults(true);
     };
 
-    if (isLoading) {
+    if (isLoading || timeLeft === null) {
         return (
             <div className="text-center p-8 min-h-screen bg-gray-900 text-white">
                 Loading questions for {testId}...
             </div>
         );
+        
     }
     
-    const results = calculateFinalResult();
-
     const handleProceedToNext = () => {
-        if (testId === 'step1') {
-            navigate('/test/step2');
-        }
+        navigate(`/quiz/step${parseInt(testId.replace('step', '')) + 1}`);
     };
     
     if (showResults) {
@@ -145,24 +146,24 @@ const Quiz = () => {
                         {testId.toUpperCase()} Results
                     </h1>
                     <p className="text-2xl font-bold text-gray-400">
-                        {results.message}
+                        {finalResults.message}
                     </p>
                     <div className="bg-gray-800 p-8 rounded-lg shadow-xl space-y-4">
                         <div className="flex justify-between items-center text-xl">
                             <span className="font-semibold">Correct Answers:</span>
-                            <span className="text-green-400 font-bold">{results.correctAnswers} / {results.totalQuestions}</span>
+                            <span className="text-green-400 font-bold">{finalResults.correctAnswers} / {finalResults.totalQuestions}</span>
                         </div>
                         <div className="flex justify-between items-center text-xl">
                             <span className="font-semibold">Score:</span>
-                            <span className="text-purple-400 font-bold">{results.percentage.toFixed(2)}%</span>
+                            <span className="text-purple-400 font-bold">{finalResults.percentage.toFixed(2)}%</span>
                         </div>
                         <div className="flex justify-between items-center text-xl">
                             <span className="font-semibold">Certification Level:</span>
-                            <span className="text-amber-400 font-bold">{results.certificationLevel}</span>
+                            <span className="text-amber-400 font-bold">{finalResults.certificationLevel}</span>
                         </div>
                     </div>
                     <div className="flex justify-center gap-4 mt-8">
-                        {results.canProceed && (
+                        {finalResults.canProceed && (
                             <Button
                                 onClick={handleProceedToNext}
                                 className="bg-gradient-primary"

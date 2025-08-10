@@ -10,8 +10,7 @@ import {
     Users 
   } from 'lucide-react'; 
   import { Link } from 'react-router'; 
-import Logo from '../Components/Logo';
-import Navbar from '../Components/Navbar';
+
    
   const Home = () => { 
     const features = [ 
@@ -30,7 +29,7 @@ import Navbar from '../Components/Navbar';
     return ( 
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100"> 
         {/* Header */} 
-     <Navbar/>
+    
    
         {/* Hero Section */} 
         <section className="container mx-auto px-6 py-16 text-center space-y-8"> 

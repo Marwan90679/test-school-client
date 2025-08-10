@@ -6,7 +6,8 @@ const LevelPage = () => {
     // Hardcoded test data, representing your steps
     const tests = [
         { id: 'step1', name: 'Step 1: A1 & A2', description: 'Total 44 questions, 44 minutes', unlocked: true },
-        { id: 'step2', name: 'Step 2: B1 & B2', description: 'Complete Step 1 to unlock', unlocked: false },
+        { id: 'step2', name: 'Step 2: B1 & B2', description: 'Complete Step 1 to unlock', unlocked: true }, 
+        { id: 'step3', name: 'Step 3: C1 & C2', description: 'Complete Step 2 to unlock', unlocked: true }, 
     ];
 
     // State to manage the open modal and the custom timer settings
@@ -69,8 +70,8 @@ const LevelPage = () => {
                         {/* Settings Modal (Popover) */}
                         {openSettingsFor === test.id && (
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                                            bg-gray-700 p-4 rounded-lg shadow-xl border border-gray-600
-                                            z-10 w-full max-w-sm"
+                                             bg-gray-700 p-4 rounded-lg shadow-xl border border-gray-600
+                                             z-10 w-full max-w-sm"
                             >
                                 <div className="flex justify-between items-center mb-4">
                                     <h3 className="text-lg font-bold">Timer Settings</h3>
